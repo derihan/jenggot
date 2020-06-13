@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block konten %}
+<div class="row pt-5">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <form action="{{ private_url }}sign-in" method="" id="form_main">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="text" name="users_email" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="text" name="users_password" class="form-control" >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <!-- <a href=" {% url 'sign_up' %} "> Registrasi </a> -->
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+{% endblock konten %}
+
+{% block app_js %}
+<script>
+    $(document).ready(function () {
+        $("#form_main").on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action') + "/",
+                data: $(this).serialize(),
+                dataType: "JSON",
+            }).done(res => {
+                if (res.status == 200) {
+                    window.location.href = '{{ private_url }}portal'
+                } else {
+                    return;
+                }
+
+            });
+        })
+    })
+</script>
+{% endblock app_js %}

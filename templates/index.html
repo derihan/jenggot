@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block konten %}
+
+<ul class="nav pt-3">
+    <li>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalmenu">
+            <i class="fa fa-th-large" aria-hidden="true"></i>
+        </button>
+    </li>
+
+    {% for link,name in nav  %}
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{{ link }}">{{ name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{{ tahun }}
+</div>
+
+{% endblock konten %}
